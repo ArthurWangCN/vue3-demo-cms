@@ -15,7 +15,7 @@
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="loginForm.password">
+        <el-input type="password" v-model="loginForm.password">
           <template #prefix>
             <el-icon :size="20">
               <Lock />
@@ -32,6 +32,8 @@
 
 <script setup>
 import { ref, reactive } from "vue";
+
+import { login } from '@/api/login.js'
 
 const loginForm = reactive({
   username: "admin",
@@ -52,8 +54,10 @@ const rules = reactive({
 const formRef = ref(null)
 
 const handleLogin = () => {
-  formRef.value.validate((valid) => {
-    console.log(valid)
+  formRef.value.validate(async valid => {
+    if (valid) {
+      const res = await login(loginForm)
+    }
   })
 };
 </script>
