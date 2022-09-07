@@ -1,11 +1,29 @@
 import { createStore } from 'vuex'
+import router from '@/router'
+import { login } from '@/api/login.js'
 
 export default createStore({
   state: {
+    token: localStorage.getItem('token') || ''
   },
   mutations: {
+    setToken(state, token) {
+      state.token = token;
+      localStorage.setItem('token', token)
+    }
   },
   actions: {
+    login({ commit }, userinfo) {
+      return new Promise((resolve, reject) => {
+        login(userinfo).then(res => {
+          commit('setToken', res.token)
+          router.replace('/')
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    }
   },
   modules: {
   }

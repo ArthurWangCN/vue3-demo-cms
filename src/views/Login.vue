@@ -1,7 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form :model="loginForm" :rules="rules" class="login-form"
-      ref="formRef">
+    <el-form :model="loginForm" :rules="rules" class="login-form" ref="formRef">
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
@@ -32,8 +31,9 @@
 
 <script setup>
 import { ref, reactive } from "vue";
+import { useStore } from "vuex";
 
-import { login } from '@/api/login.js'
+const store = useStore();
 
 const loginForm = reactive({
   username: "admin",
@@ -42,23 +42,23 @@ const loginForm = reactive({
 
 const rules = reactive({
   username: [
-    { required: true, message: 'Please input username', trigger: 'blur' },
-    { min: 3, max: 10, message: 'Length should be 3 to 10', trigger: 'blur' },
+    { required: true, message: "Please input username", trigger: "blur" },
+    { min: 3, max: 10, message: "Length should be 3 to 10", trigger: "blur" },
   ],
   password: [
-    { required: true, message: 'Please input password', trigger: 'blur' },
-    { min: 6, message: 'Weak password is not allowed', trigger: 'blur' },
+    { required: true, message: "Please input password", trigger: "blur" },
+    { min: 6, message: "Weak password is not allowed", trigger: "blur" },
   ],
-})
+});
 
-const formRef = ref(null)
+const formRef = ref(null);
 
 const handleLogin = () => {
-  formRef.value.validate(async valid => {
+  formRef.value.validate(async (valid) => {
     if (valid) {
-      const res = await login(loginForm)
+      store.dispatch("login", loginForm);
     }
-  })
+  });
 };
 </script>
 
