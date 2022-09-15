@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import router from '@/router'
 import { login } from '@/api/login.js'
+import { setTokenTime } from '@/utils/auth.js'
 
 export default createStore({
   state: {
@@ -16,6 +17,7 @@ export default createStore({
     login({ commit }, userinfo) {
       return new Promise((resolve, reject) => {
         login(userinfo).then(res => {
+          setTokenTime()
           commit('setToken', res.token)
           router.replace('/')
           resolve()
@@ -23,6 +25,11 @@ export default createStore({
           reject(error)
         })
       })
+    },
+    logout({commit}) {
+      commit('setToken', '')
+      router.replace('/login')
+      localStorage.clear();
     }
   },
   modules: {

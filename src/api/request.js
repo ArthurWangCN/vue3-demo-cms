@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import { getTokenTime, isTokenExpire } from '@/utils/auth.js'
+import store from '../store'
 
 const service = axios.create({
   baseURL: '/api',
@@ -7,6 +9,9 @@ const service = axios.create({
 })
 
 service.interceptors.request.use(config => {
+  if (isTokenExpire()) {
+    store.dispatch('logout')
+  }
   config.headers.Authorization = localStorage.getItem('token') || ''
   return config
 }, error => {
