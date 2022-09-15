@@ -11,6 +11,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import '@/router/permission.js'
+
 const app = createApp(App)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
