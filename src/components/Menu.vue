@@ -32,7 +32,6 @@ const iconList = ref(['user', 'setting', 'shop', 'tickets', 'PieChart'])
 
 const initMenuList = async () => {
   const res = await menuList();
-  console.log(res);
   menus.value = res;
 };
 

@@ -4,7 +4,7 @@
       <Menu />
     </el-aside>
     <el-container>
-      <el-header>Header</el-header>
+      <el-header><Header /></el-header>
       <el-main>
         <router-view />
       </el-main>
@@ -14,6 +14,7 @@
 
 <script setup>
 import Menu from '@/components/Menu.vue'
+import Header from '@/components/Header.vue'
 </script>
 
 <style lang="scss" scoped>
