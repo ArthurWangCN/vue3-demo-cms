@@ -13,10 +13,12 @@ import store from './store'
 
 import '@/router/permission.js'
 
+import i18n from './i18n'
+
 const app = createApp(App)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
 
-app.use(store).use(router).use(ElementPlus).mount('#app')
+app.use(store).use(router).use(ElementPlus).use(i18n).mount('#app')

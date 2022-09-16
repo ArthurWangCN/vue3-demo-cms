@@ -2,7 +2,7 @@
   <div class="login-container">
     <el-form :model="loginForm" :rules="rules" class="login-form" ref="formRef">
       <div class="title-container">
-        <h3 class="title">用户登录</h3>
+        <h3 class="title">{{$t('login.title')}}</h3>
       </div>
       <el-form-item prop="username">
         <el-input v-model="loginForm.username">
